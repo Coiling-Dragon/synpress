@@ -1,10 +1,15 @@
 import '@testing-library/cypress/add-commands';
 import 'cypress-wait-until';
+import 'cypress-file-upload';
 
 // puppeteer commands
 
 Cypress.Commands.add('initPuppeteer', () => {
   return cy.task('initPuppeteer');
+});
+
+Cypress.Commands.add('puppeteerBrowser', () => {
+  return cy.task('puppeteerBrowser');
 });
 
 Cypress.Commands.add('assignWindows', () => {

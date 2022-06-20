@@ -58,6 +58,9 @@ module.exports = (on, config) => {
       const connected = await puppeteer.init();
       return connected;
     },
+    puppeteerBrowser: async () => {
+      return await puppeteer.puppeteerBrowser()
+    },
     clearPuppeteer: async () => {
       const cleared = await puppeteer.clear();
       return cleared;
