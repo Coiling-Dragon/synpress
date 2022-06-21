@@ -8,7 +8,8 @@ let activeTabName;
 
 module.exports = {
   puppeteerBrowser: () => {
-    return puppeteerBrowser;
+    let pages = await puppeteerBrowser.pages();
+    return pages
   },
   mainWindow: () => {
     return mainWindow;
