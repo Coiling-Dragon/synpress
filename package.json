@@ -9,13 +9,9 @@
     "testing",
     "e2e"
   ],
-  "homepage": "https://github.com/synthetixio/synpress#readme",
-  "bugs": {
-    "url": "https://github.com/synthetixio/synpress/issues"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/synthetixio/synpress.git"
+    "url": "git+https://github.com/Coiling-Dragon/synpress.git"
   },
   "license": "MIT",
   "author": {
@@ -39,9 +35,9 @@
     "release:minor": "release-it minor --disable-metrics",
     "release:patch": "release-it patch --disable-metrics",
     "update:deps": "ncu -u -x 'node-fetch eslint' && npm install --legacy-peer-deps",
-    "start:server": "serve tests/test-dapp -p 3000",
-    "test:e2e": "start-server-and-test 'npm run start:server' http-get://localhost:3000 'SYNPRESS_LOCAL_TEST=true node synpress.js run --configFile=tests/e2e/config.json'",
-    "test:e2e:ci": "start-server-and-test 'npm run start:server' http-get://localhost:3000 'SYNPRESS_LOCAL_TEST=true node synpress.js run --group smoke-tests --record'"
+    "start:server": "serve tests/test-dapp -p 3100",
+    "test:e2e": "start-server-and-test 'npm run start:server' http-get://localhost:3100 'SYNPRESS_LOCAL_TEST=true node synpress.js run --configFile=tests/e2e/config.json'",
+    "test:e2e:ci": "start-server-and-test 'npm run start:server' http-get://localhost:3100 'SYNPRESS_LOCAL_TEST=true node synpress.js run --group smoke-tests --record'"
   },
   "dependencies": {
     "@cypress/code-coverage": "3.9.12",
@@ -63,6 +59,7 @@
     "commander": "9.1.0",
     "cross-zip": "4.0.0",
     "cypress": "9.5.3",
+    "cypress-file-upload": "^5.0.8",
     "cypress-wait-until": "1.7.2",
     "eslint": "7.32.0",
     "eslint-config-prettier": "8.5.0",

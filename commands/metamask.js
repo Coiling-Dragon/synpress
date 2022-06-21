@@ -448,7 +448,9 @@ module.exports = {
   confirmTransaction: async gasConfig => {
     const isKovanTestnet = getNetwork().networkName === 'kovan';
     // todo: remove waitForTimeout below after improving switchToMetamaskNotification
-    await puppeteer.metamaskWindow().waitForTimeout(1000);
+    // increase the timeout value, so that Mint NFT confirmTransaction does not get timed out
+    // ( metamask popup is really slow on minting )
+    await puppeteer.metamaskWindow().waitForTimeout(15000);
     const notificationPage = await puppeteer.switchToMetamaskNotification();
     if (gasConfig && gasConfig.gasFee) {
       await puppeteer.waitAndSetValue(
