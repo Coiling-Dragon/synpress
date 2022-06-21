@@ -7,10 +7,6 @@ let metamaskWindow;
 let activeTabName;
 
 module.exports = {
-  puppeteerBrowser: () => {
-    let pages = await puppeteerBrowser.pages();
-    return pages
-  },
   mainWindow: () => {
     return mainWindow;
   },
