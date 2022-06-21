@@ -8,10 +8,6 @@ Cypress.Commands.add('initPuppeteer', () => {
   return cy.task('initPuppeteer');
 });
 
-Cypress.Commands.add('puppeteerBrowser', () => {
-  return cy.task('puppeteerBrowser');
-});
-
 Cypress.Commands.add('assignWindows', () => {
   return cy.task('assignWindows');
 });
