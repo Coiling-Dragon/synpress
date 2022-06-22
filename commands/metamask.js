@@ -391,6 +391,8 @@ module.exports = {
     return true;
   },
   confirmSignatureRequest: async () => {
+    // ( metamask popup is really buggy)
+    await puppeteer.metamaskWindow().waitForTimeout(2000);
     const notificationPage = await puppeteer.switchToMetamaskNotification();
     await puppeteer.waitAndClick(
       signaturePageElements.confirmSignatureRequestButton,
@@ -400,6 +402,8 @@ module.exports = {
     return true;
   },
   rejectSignatureRequest: async () => {
+    // ( metamask popup is really buggy)
+    await puppeteer.metamaskWindow().waitForTimeout(2000);
     const notificationPage = await puppeteer.switchToMetamaskNotification();
     await puppeteer.waitAndClick(
       signaturePageElements.rejectSignatureRequestButton,
