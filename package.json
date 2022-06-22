@@ -9,10 +9,6 @@
     "testing",
     "e2e"
   ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Coiling-Dragon/synpress.git"
-  },
   "license": "MIT",
   "author": {
     "name": "Synthetix"

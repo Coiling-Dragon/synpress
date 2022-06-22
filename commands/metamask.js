@@ -431,22 +431,28 @@ module.exports = {
     return true;
   },
   acceptAccess: async allAccounts => {
-    const notificationPage = await puppeteer.switchToMetamaskNotification();
-    if (allAccounts === true) {
+    // ( metamask popup is really buggy)
+    await puppeteer.metamaskWindow().waitForTimeout(2000);
+    try {
+      const notificationPage = await puppeteer.switchToMetamaskNotification();
+      if (allAccounts === true) {
+        await puppeteer.waitAndClick(
+          notificationPageElements.selectAllCheck,
+          notificationPage,
+        );
+      }
       await puppeteer.waitAndClick(
-        notificationPageElements.selectAllCheck,
+        notificationPageElements.nextButton,
         notificationPage,
       );
+      await puppeteer.waitAndClick(
+        permissionsPageElements.connectButton,
+        notificationPage,
+      );
+      await puppeteer.metamaskWindow().waitForTimeout(3000);
+    } catch (err) {
+      console.error(err);
     }
-    await puppeteer.waitAndClick(
-      notificationPageElements.nextButton,
-      notificationPage,
-    );
-    await puppeteer.waitAndClick(
-      permissionsPageElements.connectButton,
-      notificationPage,
-    );
-    await puppeteer.metamaskWindow().waitForTimeout(3000);
     return true;
   },
   confirmTransaction: async gasConfig => {
