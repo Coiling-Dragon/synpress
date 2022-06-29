@@ -391,8 +391,6 @@ module.exports = {
     return true;
   },
   confirmSignatureRequest: async () => {
-    // ( metamask popup is really buggy)
-    await puppeteer.metamaskWindow().waitForTimeout(2000);
     const notificationPage = await puppeteer.switchToMetamaskNotification();
     await puppeteer.waitAndClick(
       signaturePageElements.confirmSignatureRequestButton,
@@ -401,9 +399,16 @@ module.exports = {
     await puppeteer.metamaskWindow().waitForTimeout(3000);
     return true;
   },
+  confirmDataSignatureRequest: async () => {
+    const notificationPage = await puppeteer.switchToMetamaskNotification();
+    await puppeteer.waitAndClick(
+      signaturePageElements.confirmDataSignatureRequestButton,
+      notificationPage,
+    );
+    await puppeteer.metamaskWindow().waitForTimeout(3000);
+    return true;
+  },
   rejectSignatureRequest: async () => {
-    // ( metamask popup is really buggy)
-    await puppeteer.metamaskWindow().waitForTimeout(2000);
     const notificationPage = await puppeteer.switchToMetamaskNotification();
     await puppeteer.waitAndClick(
       signaturePageElements.rejectSignatureRequestButton,
@@ -431,36 +436,28 @@ module.exports = {
     return true;
   },
   acceptAccess: async allAccounts => {
-    // ( metamask popup is really buggy)
-    await puppeteer.metamaskWindow().waitForTimeout(2000);
-    try {
-      const notificationPage = await puppeteer.switchToMetamaskNotification();
-      if (allAccounts === true) {
-        await puppeteer.waitAndClick(
-          notificationPageElements.selectAllCheck,
-          notificationPage,
-        );
-      }
+    const notificationPage = await puppeteer.switchToMetamaskNotification();
+    if (allAccounts === true) {
       await puppeteer.waitAndClick(
-        notificationPageElements.nextButton,
+        notificationPageElements.selectAllCheck,
         notificationPage,
       );
-      await puppeteer.waitAndClick(
-        permissionsPageElements.connectButton,
-        notificationPage,
-      );
-      await puppeteer.metamaskWindow().waitForTimeout(3000);
-    } catch (err) {
-      console.error(err);
     }
+    await puppeteer.waitAndClick(
+      notificationPageElements.nextButton,
+      notificationPage,
+    );
+    await puppeteer.waitAndClick(
+      permissionsPageElements.connectButton,
+      notificationPage,
+    );
+    await puppeteer.metamaskWindow().waitForTimeout(3000);
     return true;
   },
   confirmTransaction: async gasConfig => {
     const isKovanTestnet = getNetwork().networkName === 'kovan';
     // todo: remove waitForTimeout below after improving switchToMetamaskNotification
-    // increase the timeout value, so that Mint NFT confirmTransaction does not get timed out
-    // ( metamask popup is really slow on minting )
-    await puppeteer.metamaskWindow().waitForTimeout(15000);
+    await puppeteer.metamaskWindow().waitForTimeout(1000);
     const notificationPage = await puppeteer.switchToMetamaskNotification();
     if (gasConfig && gasConfig.gasFee) {
       await puppeteer.waitAndSetValue(

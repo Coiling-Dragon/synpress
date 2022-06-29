@@ -1,6 +1,5 @@
 import '@testing-library/cypress/add-commands';
 import 'cypress-wait-until';
-import 'cypress-file-upload';
 
 // puppeteer commands
 
@@ -102,6 +101,10 @@ Cypress.Commands.add('rejectMetamaskDecryptionRequest', () => {
 
 Cypress.Commands.add('rejectMetamaskSignatureRequest', () => {
   return cy.task('rejectMetamaskSignatureRequest');
+});
+
+Cypress.Commands.add('confirmMetamaskDataSignatureRequest', () => {
+  return cy.task('confirmMetamaskDataSignatureRequest');
 });
 
 Cypress.Commands.add('confirmMetamaskPermissionToSpend', () => {
